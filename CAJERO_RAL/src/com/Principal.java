@@ -8,7 +8,7 @@ public class Principal {
 		Cuenta c2 = new Cuenta("002", 750.00, 20000.00, 100.00);
 		Cuenta c3 = new Cuenta("003", 2000.00, 8000.00, 100.00);
 		Cuenta c4 = new Cuenta("004", 1500.00, 5000.00, 100.00);
-		Cuenta c5 = new Cuenta("005", 300.00, 10000.00, 1000.00);
+		Cuenta c5 = new Cuenta("005", 300.00, 10000.00, 100.00);
 		//crea el array 
 		Cuenta[] db = new Cuenta [5];
 		//Añade las cuentas al array		
@@ -20,14 +20,21 @@ public class Principal {
 			
 	Cajero cajero1 = new Cajero("La chingada", db);
 	
-		//cajero1.consultarSaldo("004");
+//	cajero1.consultarSaldo("004");
+	//---retiro
 //	Object [] datos = cajero1.retirar("002", 100.00);
 //	System.out.println(datos[0]);
 //	System.out.println(datos[1]);
-		
-	Ticket ticket = cajero1.depositar("005", 9800.00);
+	//---deposito
+//	Ticket ticket = cajero1.depositar("005", 9800.00);
+//	System.out.println(ticket);
+//	System.out.println("");
+//	cajero1.consultarSaldo("005");
+	//---transferencia
+	Ticket ticket = cajero1.transferir("004","005", 1000.00);
 	System.out.println(ticket);
 	System.out.println("");
+	cajero1.consultarSaldo("004");
 	cajero1.consultarSaldo("005");
 		}
 		
