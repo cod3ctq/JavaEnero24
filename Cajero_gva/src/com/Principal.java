@@ -20,17 +20,31 @@ public class Principal {
 		
 		Cajero cajero1 = new Cajero("Av. Juarez 3240", db);
 		
-		cajero1.consultarSaldo("004");
-		// devuelve los datos en un array de objects, por lo que devolvemos uno
-//		Object[] datos = cajero1.reitrar("004", 100.00);
-//		System.out.println(datos[0]);
-//		System.out.println(datos[1]);
-		
-		
-		Ticket datos = cajero1.depositar("004", 150.00);
-		System.out.println(datos);
-		cajero1.consultarSaldo("004");
 //		cajero1.consultarSaldo("004");
+//		// devuelve los datos en un array de objects, por lo que devolvemos uno
+////		Object[] datos = cajero1.reitrar("004", 100.00);
+////		System.out.println(datos[0]);
+////		System.out.println(datos[1]);
+//		
+//		
+//		Ticket datos = cajero1.depositar("004", 150.00);
+//		System.out.println(datos);
+//		cajero1.consultarSaldo("004");
+//		cajero1.consultarSaldo("004");
+//		cajero1.reitrar("004", 100.00);
+//		cajero1.consultarSaldo("004");
+		
+//		cajero1.depositar("004", 100.00);
+		
+//		cajero1.transferir("003", "001", 1000.00);
+		Object[] datos2 = cajero1.transferir("003", "001", 1500.00);
+		System.out.println(datos2[0]);
+		System.out.println("Transferido: $" + datos2[1] + "\n");
+		
+		cajero1.consultarSaldo("003");
+		cajero1.consultarSaldo("001");
+		
+		
 	}
 
 }
