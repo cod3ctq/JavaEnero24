@@ -132,7 +132,58 @@ public Object [] buscar (String numcuenta) {
  		}
  		
  		return ticket;
- 	  
- 		
- 	 }
+ 	   }
+ 	 
+ 	 
+ //-----------Transferir
+public Ticket transferir(String numCuenta1, String numCuenta2, double monto) {
+	Cuenta c1 = (Cuenta) this.buscar(numCuenta1)[0];
+	Cuenta c2 = (Cuenta) this.buscar(numCuenta2)[0];
+	Ticket ticket = null;
+	
+	if (c1 != null) { //si la cuenta existe
+		int index = (int)this.buscar(numCuenta1)[1];
+		if (c2 != null) {
+			int index2 = (int)this.buscar(numCuenta2)[1];	
+		
+			
+			//que c1 
+			//que c1 no quede por debajo del minimo
+			//que c2 no quede sobre del Max
+			//depositar
+		if((c1.getSaldodisponible()-monto)<c1.getMin()) {
+			System.out.println("La cuenta de Origen quedaria por debajo del minimo");
+		}
+		if((monto+c2.getSaldodisponible())>c2.getMax()) {
+			System.out.println("El deposito sobrepasa el Maximo de la cuenta Destino");
+		}
+			//tranferencia	
+			//Saldo menos el monto es mayor al minimo		Saldo mas el monto es menor al maximo
+		if((c1.getSaldodisponible()-monto)>c1.getMin() && ((c2.getSaldodisponible())+monto)<c2.getMax()) {
+			
+			c1.setSaldodisponible(c1.getSaldodisponible()-monto);
+			c2.setSaldodisponible(c2.getSaldodisponible()+monto);
+			
+			this.cuentas[index]=c1;
+			this.cuentas[index2]=c2;
+			ticket = new Ticket(this.folio = folio +1, this.direccion, "Transferencia", monto, new Date());
+			
+			}	
+		   }
+		else {//si no existe
+			System.out.println("No Existe la cuenta "+ c2);
+		}
+	}
+		else {//si no existe
+			System.out.println("No Existe la cuenta "+ c1);
+		}
+	
+		
+		return ticket;
+		
+		
+	
+	
+}
+ 	 
 }
