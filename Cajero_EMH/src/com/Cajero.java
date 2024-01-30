@@ -78,7 +78,11 @@ public class Cajero {
 				this.cuentas[index] = c;
 				
 				
-				ticket = new Ticket(this.folio = folio +1, this.direccion, "RETIRO", monto, new Date());
+				ticket = new Ticket(this.folio = folio +1, 
+						this.direccion, 
+						"RETIRO", 
+						monto, 
+						new Date());
 				
 				//Empaquetar los resultados de salida 
 				output[0] = ticket;
@@ -151,5 +155,72 @@ public class Cajero {
 		return ticket;
 	}
 	
+	
+	
+	
+	public TicketTransferencia transferir(String numCuentaOrigen, String numCuentaDestino, double monto) {
+	    Cuenta cuentaOrigen = (Cuenta) buscar(numCuentaOrigen)[0];
+	    Cuenta cuentaDestino = (Cuenta) buscar(numCuentaDestino)[0];
+	    TicketTransferencia ticketTransferencia = null;
+
+	    if (cuentaOrigen != null && cuentaDestino != null) {
+	        int indexOrigen = (int) buscar(numCuentaOrigen)[1];
+	        System.out.println(indexOrigen);
+	        
+	        // Validaciones, por ejemplo, si hay suficiente saldo en la cuenta de origen
+	        if (cuentaOrigen.getSaldoDisponible() < monto) {
+	            System.out.println("No hay suficiente saldo en la cuenta de origen para realizar la transferencia.");
+	        } 
+	        else {
+	        	//Si la cuenta inicial tiene saldo disponible
+	        	/********************************************************************/
+	        	 if ((cuentaOrigen.getSaldoDisponible()-monto) < cuentaOrigen.getMin()) {
+	 	        	System.out.println("El saldo de su cuenta quedara por debajo del permitido con esta transferencia");
+	 	        	System.out.println("Su saldo acutal es de $"+cuentaOrigen.getSaldoDisponible());
+	 	        	System.out.println("Su saldo minimo permitido es $"+ cuentaOrigen.getMin());
+	 	        	System.out.println("Su saldo si realiza esta transferencia $"+(cuentaOrigen.getSaldoDisponible()-monto));
+	 	        	return null;
+	 	        }
+	 	        else if ((cuentaDestino.getSaldoDisponible()+monto) > cuentaDestino.getMax()) {
+	 	        	System.out.println("La cuenta "+cuentaDestino+" No puede recibir la transferecnaia de $"+monto+", supera su limite permitido");
+	 	        	return null;
+	 	        }
+	        	/********************************************************************/
+	 	        else {
+		            cuentaOrigen.setSaldoDisponible(cuentaOrigen.getSaldoDisponible() - monto);
+		            cuentaDestino.setSaldoDisponible(cuentaDestino.getSaldoDisponible() + monto);
+	
+		            // Actualizar las cuentas en el array
+		            cuentas[indexOrigen] = cuentaOrigen;
+		            int indexDestino = (int) buscar(numCuentaDestino)[1];
+		            cuentas[indexDestino] = cuentaDestino;
+		            
+		            System.out.println("Index origen y destino");
+		            System.out.println(indexOrigen);
+		            System.out.println(indexDestino);
+	
+		            // Generar el ticket de transferencia
+		            ticketTransferencia = new TicketTransferencia(
+		                    this.folio = folio + 1,
+		                    this.direccion,
+		                    "TRANSFERENCIA",
+		                    monto,
+		                    new Date(),
+		                    numCuentaOrigen,
+		                    monto, 
+		                    numCuentaDestino
+		            );
+	
+		            System.out.println("Transferencia realizada con éxito.");
+	 	        }
+	        }
+	    } 
+	    else {
+	        System.out.println("Una de las cuentas involucradas en la transferencia no existe.");
+	    }
+
+	    return ticketTransferencia;
+	}
+
 
 }
