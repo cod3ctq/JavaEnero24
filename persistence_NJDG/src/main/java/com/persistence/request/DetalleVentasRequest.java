@@ -1,0 +1,63 @@
+package com.persistence.request;
+
+
+public class DetalleVentasRequest {
+
+	 public DetalleVentasRequest() {
+			
+		}
+	 
+	 public DetalleVentasRequest(int id) {
+		this.detVentaId=id;
+	}
+	 
+	 private int detVentaId;
+	 private int ventaId;
+	 private int productoId;
+	 private int cantidad;
+	 
+	 
+	public DetalleVentasRequest(int detVentaId, int ventaId, int productoId, int cantidad) {
+		super();
+		this.detVentaId = detVentaId;
+		this.ventaId = ventaId;
+		this.productoId = productoId;
+		this.cantidad = cantidad;
+	}
+
+	public int getDetVentaId() {
+		return detVentaId;
+	}
+
+	public void setDetVentaId(int detVentaId) {
+		this.detVentaId = detVentaId;
+	}
+
+	public int getVentaId() {
+		return ventaId;
+	}
+
+	public void setVentaId(int ventaId) {
+		this.ventaId = ventaId;
+	}
+
+	public int getProductoId() {
+		return productoId;
+	}
+
+	public void setProductoId(int productoId) {
+		this.productoId = productoId;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	 
+		
+		
+}
